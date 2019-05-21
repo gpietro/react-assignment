@@ -1,6 +1,19 @@
 import React, { useState, useEffect } from "react";
+import styled from 'styled-components';
 
-const MySelector = () => {
+
+const AwesomeSelect = styled.select`
+position: relative;
+  display: block;
+  width: 100%;
+  
+  font-family: 'Open Sans', 'Helvetica Neue', 'Segoe UI', 'Calibri', 'Arial', sans-serif;
+  font-size: 1.2em;  
+  color: #60666d;
+  border-radius: 0;
+`
+
+export default ({onChange}) => {
   const [makers, setMakers] = useState([]);
   const [selectedMaker, setSelectedMaker] = useState("");
   const [cachedModels, setCachedModels] = useState({});
@@ -36,11 +49,8 @@ const MySelector = () => {
   }, [cachedModels, selectedMaker]);
 
   return (
-    <div style={{ display: "flex" }}>
-      <h1 data-testid="title">
-        {selectedMaker} - {selectedModel}
-      </h1>
-      <select
+      <div style={{display: 'flex'}}>
+      <AwesomeSelect
         data-testid="maker-selector"
         value={selectedMaker}
         onChange={e => {
@@ -56,13 +66,14 @@ const MySelector = () => {
             {label}
           </option>
         ))}
-      </select>
+      </AwesomeSelect>
 
-      <select
+      <AwesomeSelect
         data-testid="model-selector"
         value={selectedModel}
         onChange={e => {
           setSelectedModel(e.target.value);
+          onChange({makeKey: selectedMaker, modelKey: selectedModel})
         }}
         disabled={!selectedMaker}
       >
@@ -74,9 +85,7 @@ const MySelector = () => {
             {label}
           </option>
         ))}
-      </select>
-    </div>
+      </AwesomeSelect>
+      </div>
   );
 };
-
-export default MySelector;

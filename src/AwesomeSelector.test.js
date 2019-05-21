@@ -7,11 +7,11 @@ import {
   getNodeText
 } from "react-testing-library";
 import { FetchMock } from '@react-mock/fetch';
-import MySelector from "./MySelector";
+import MySelector from "./AwesomeSelector";
 
 afterEach(cleanup);
 
-test("test selectors", async () => {
+test("test awesome selectors", async () => {
   const { getByText, getByTestId } = render(
     <FetchMock
     mocks={[
@@ -90,32 +90,4 @@ test("test selectors", async () => {
 
   expect(getNodeText(afterTitle)).toBe("alfa-romeo - 146");
 
-  // const { getByTestId, getByText, container } = render(<MySelector />);
-
-  // expect(getByText("0 - 0")).toBeTruthy();
-
-  // const makerSelector = getByTestId("maker-selector");
-  // const modelSelector = getByTestId("model-selector");
-  // expect(modelSelector.disabled).toBe(true);
-  // fireEvent.click(makerSelector);
-
-  // const option = await waitForElement(() => getByText("BMW"));
-
-  // fireEvent.click(option);
-
-  // expect(getByText("BMW - 0")).toBeTruthy();
-
-  // const modelSelector2 = await waitForElement(() =>
-  //   getByTestId("model-selector")
-  // );
-  // expect(modelSelector2.disabled).toBe(false);
-  //expect(modelSelector2.disabled).toBe(false);
-
-  // const makerOption = await findByText("BMW");
-  // expect(makerOption.value).toBe("bmw");
-  // fireEvent.focus(makerOption);
-  // fireEvent.keyDown(makerOption);
-
-  // fireEvent.change(getByText("BMW"));
-  // expect(modelSelector.disabled).toBe(false);
 });

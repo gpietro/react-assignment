@@ -1,11 +1,11 @@
 import React from "react";
-import MySelector from "./MySelector";
+import AwesomeSelector from "./AwesomeSelector";
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <MySelector />
+      <AwesomeSelector />
     </div>
   );
 }
