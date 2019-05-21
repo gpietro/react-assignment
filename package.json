@@ -2,6 +2,7 @@
   "name": "formik",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://catalogue-service.preprod.carforyou.ch",
   "dependencies": {
     "@flipbyte/formik-json": "^0.2.6",
     "jsonfile": "^5.0.0",
@@ -10,7 +11,8 @@
     "react-scripts": "3.0.1"
   },
   "devDependencies": {
-    "react-testing-library": "^7.0.1"
+    "react-testing-library": "^7.0.1",
+    "@react-mock/fetch": "^0.3.0"
   },
   "scripts": {
     "start": "react-scripts start",

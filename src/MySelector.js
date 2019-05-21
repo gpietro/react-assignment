@@ -7,7 +7,7 @@ const MySelector = () => {
   const [selectedModel, setSelectedModel] = useState("");
 
   useEffect(() => {
-    fetch("https://catalogue-service.preprod.carforyou.ch/api/makes")
+    fetch("/api/makes")
       .then(response => response.json())
       .then(jsonMakers =>
         setMakers(
@@ -21,7 +21,7 @@ const MySelector = () => {
       async function fetchModels(selectedMaker) {
         console.log("do fetch");
         const models = await fetch(
-          `https://catalogue-service.preprod.carforyou.ch/api/makes/key/${selectedMaker}/models`
+          `/api/makes/key/${selectedMaker}/models`
         ).then(res => res.json());
         setCachedModels({
           ...cachedModels,
@@ -45,10 +45,10 @@ const MySelector = () => {
         value={selectedMaker}
         onChange={e => {
           setSelectedMaker(e.target.value);
-          setSelectedModel();
+          setSelectedModel("");
         }}
       >
-        <option value={0} disabled>
+        <option value={""} disabled>
           Select maker
         </option>
         {makers.map(({ value, label }) => (
@@ -66,7 +66,7 @@ const MySelector = () => {
         }}
         disabled={!selectedMaker}
       >
-        <option value={0} disabled>
+        <option value={""} disabled>
           select model
         </option>
         {(cachedModels[selectedMaker] || []).map(({ value, label }) => (
