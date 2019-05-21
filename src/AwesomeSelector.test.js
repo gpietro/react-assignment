@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   render,
   fireEvent,
@@ -12,6 +12,10 @@ import MySelector from "./AwesomeSelector";
 afterEach(cleanup);
 
 test("test awesome selectors", async () => {
+  const setSelectedCar = ({ makeKey, modelKey}) => {
+    expect(makeKey).toBe('alfa-romeo');
+    expect(modelKey).toBe('146');
+  }
   const { getByText, getByTestId } = render(
     <FetchMock
     mocks={[
@@ -58,7 +62,7 @@ test("test awesome selectors", async () => {
         "name": "155"
       } ]}
     ]}
-  ><MySelector />
+  ><MySelector onChange={setSelectedCar}/>
   </FetchMock>);
   const beforeMakerSelector = await waitForElement(() =>
     getByTestId("maker-selector")
@@ -69,11 +73,10 @@ test("test awesome selectors", async () => {
   );
   expect(beforeModelSelector.disabled).toBe(true);
 
-  const beforeTitle = await waitForElement(() => getByTestId("title"));
-  expect(getNodeText(beforeTitle)).toBe(" - ");
+  // const beforeTitle = await waitForElement(() => getByTestId("title"));
+  // expect(getNodeText(beforeTitle)).toBe(" - ");
 
   fireEvent.change(beforeMakerSelector, { target: { value: "alfa-romeo" } });
-  console.log('value', beforeMakerSelector.value)
   expect(beforeMakerSelector.value).toBe("alfa-romeo");
 
   // Model selecor is ensabled when marker is selected
@@ -86,8 +89,8 @@ test("test awesome selectors", async () => {
   expect(getByText("146")).toBeTruthy();
   fireEvent.change(afterModelSelector, { target: { value: "146" } });
 
-  const afterTitle = await waitForElement(() => getByTestId("title"));
-
-  expect(getNodeText(afterTitle)).toBe("alfa-romeo - 146");
+  // const afterTitle = await waitForElement(() => getByTestId("title"));
+  // expect(getNodeText(afterTitle)).toBe("alfa-romeo - 146");
+  
 
 });

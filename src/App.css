@@ -1,5 +1,7 @@
 .App {
   margin-top: 100px;
+  margin: auto;
+  width: 800px;
 }
 
 .App-logo {
