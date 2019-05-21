@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 
 const MySelector = () => {
   const [makers, setMakers] = useState([]);
-  const [selectedMaker, setSelectedMaker] = useState(0);
+  const [selectedMaker, setSelectedMaker] = useState("");
   const [cachedModels, setCachedModels] = useState({});
-  const [selectedModel, setSelectedModel] = useState(0);
+  const [selectedModel, setSelectedModel] = useState("");
 
   useEffect(() => {
     fetch("https://catalogue-service.preprod.carforyou.ch/api/makes")
@@ -37,7 +37,7 @@ const MySelector = () => {
 
   return (
     <div style={{ display: "flex" }}>
-      <h1>
+      <h1 data-testid="title">
         {selectedMaker} - {selectedModel}
       </h1>
       <select
@@ -45,6 +45,7 @@ const MySelector = () => {
         value={selectedMaker}
         onChange={e => {
           setSelectedMaker(e.target.value);
+          setSelectedModel();
         }}
       >
         <option value={0} disabled>
