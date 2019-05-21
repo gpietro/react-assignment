@@ -37,14 +37,18 @@ const MySelector = () => {
 
   return (
     <div style={{ display: "flex" }}>
+      <h1>
+        {selectedMaker} - {selectedModel}
+      </h1>
       <select
+        data-testid="maker-selector"
         value={selectedMaker}
         onChange={e => {
           setSelectedMaker(e.target.value);
         }}
       >
         <option value={0} disabled>
-          select maker
+          Select maker
         </option>
         {makers.map(({ value, label }) => (
           <option key={`key-${value}`} value={value}>
@@ -54,6 +58,7 @@ const MySelector = () => {
       </select>
 
       <select
+        data-testid="model-selector"
         value={selectedModel}
         onChange={e => {
           setSelectedModel(e.target.value);

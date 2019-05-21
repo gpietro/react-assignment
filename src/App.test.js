@@ -1,16 +1,41 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import { render, fireEvent, cleanup } from "react-testing-library";
-import App, { MySelector } from "./App";
-import { exportAllDeclaration } from "@babel/types";
+import {
+  render,
+  fireEvent,
+  cleanup,
+  waitForElement
+} from "react-testing-library";
+import MySelector from "./MySelector";
 
-it("test selector", () => {
-  const { getByText, getByRole, container } = render(<MySelector />);
+afterEach(cleanup);
 
-  const options = container.querySelector("select");
-  console.log("options", options);
-  expect(options.length).toBe(4);
-  fireEvent.click(container);
+test("test model selector is disabled", async () => {
+  const { getByTestId, getByText, container } = render(<MySelector />);
 
-  //const display = getByRole("");
+  expect(await waitForElement(() => getByText("0 - 0"))).toBeTruthy();
+
+  const modelSelector = await waitForElement(() =>
+    getByTestId("model-selector")
+  );
+  expect(modelSelector.disabled).toBe(true);
+  // console.log(getByText("BMW"));
+  const option = await waitForElement(() => getByText("BMW"));
+
+  fireEvent.change(option, { target: { value: "bmw" } });
+
+  expect(await waitForElement(() => getByText("0 - 0"))).toBeTruthy();
+
+  const modelSelector2 = await waitForElement(() =>
+    getByTestId("model-selector")
+  );
+  expect(modelSelector2.disabled).toBe(false);
+  //expect(modelSelector2.disabled).toBe(false);
+
+  // const makerOption = await findByText("BMW");
+  // expect(makerOption.value).toBe("bmw");
+  // fireEvent.focus(makerOption);
+  // fireEvent.keyDown(makerOption);
+
+  // fireEvent.change(getByText("BMW"));
+  // expect(modelSelector.disabled).toBe(false);
 });
